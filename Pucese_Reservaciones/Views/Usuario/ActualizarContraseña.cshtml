@@ -1,0 +1,81 @@
+﻿@model Model.ResetPasswordModel
+
+@{
+    ViewBag.Title = "ActualizarContraseña";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container well contenedor">
+        <h2>Actualizar Contraseña</h2>
+
+
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResetCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ResetCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ResetCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pass, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PassOld, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PassOld, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PassOld, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6">
+                    <button type="submit" class="btn btn-primary col-md-6">Actualizar su contraseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.active = false;
+            $('body').bind('click keypress', function () { $.active = true; });
+            checkActivity(120000, 1000, 0); // timeout = 1200002 minutos, interval = 1 segundo.
+        });
+
+        function checkActivity(timeout, interval, elapsed) {
+            if ($.active) {
+                elapsed = 0;
+                $.active = false;
+                $.get('heartbeat');
+            }
+            if (elapsed < timeout) {
+                elapsed += interval;
+                setTimeout(function () {
+                    checkActivity(timeout, interval, elapsed);
+                }, interval);
+            } else {
+                window.location = 'http://localhost:49842/Usuario/Recuperacion'; // Redirect to "session expired" page.
+            }
+        }
+    </script>
+}

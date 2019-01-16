@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Model.ReservaCE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+
+                <div class="profile-userpic">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc75m5FWG8jh8gSXJvoLkBJyZ7kpxivbtp9kKm-WKMxhg13BReLw" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        @if (Session["Id"] != null)
+                        {
+                            <h4> @Session["Email"].ToString()</h4>
+                        }
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+
+                    <a href="http://localhost:54857/Usuario/Logout" class="btn btn-success btn-sm">Cerrar Sesio</a>
+
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Overview
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:54857/Usuario/Index">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Listado de Usuarios
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:54857/Reserva/CreateReserva">
+                                <i class="	glyphicon glyphicon-plus"></i>
+                                Reservar Lavoratorios
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:54857/Auditoria/Index">
+                                <i class="glyphicon glyphicon-asterisk"></i>
+                                Historial
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:54857/Auditoria/Administracion">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                Administración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <p>
+                    @Html.ActionLink("Crear nueva Reserva", "CreateReserva")
+                </p>
+                <h2>Listado de  Reserva</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fecha)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ciclo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Hora_Iinicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Hora_Fin)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Novedades)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Laboratorios)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Motivos)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Usuarios)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ciclo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hora_Iinicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hora_Fin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Novedades)
+                            </td>
+
+                            <td>
+                                @item.Laboratorios
+                            </td>
+                            <td>
+                                @item.Motivos
+                            </td>
+                            <td>
+                                @item.Usuarios
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<center>
+    <strong>Developer by <a href="https://www.facebook.com/belkix.requejomicolta" target="_blank">Belkix</a></strong>
+</center>
+<br>
+<br>
+
+

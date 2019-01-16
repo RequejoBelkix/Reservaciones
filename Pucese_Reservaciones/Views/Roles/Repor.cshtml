@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="container" style="width: 100%;"></div>
+
+
+    </form>
+
+</body>
+<script src="/scri/jquery-3.3.1.js"></script>
+<script src="/scri/highcharts.js"></script>
+<script src="scri/exporting.js"></script>
+<script>
+    // Build the chart
+
+    $(document).ready(function () {
+        $.getJSON("/Roles/GetData", function (data) {
+
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Reporte Roles'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Porcentajes',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'AMINISTRADOR',
+                        y: data.admin
+                    }, {
+                        name: 'RECEPCION',
+                            y: data.recepcion
+                    }, {
+                        name: 'DOCENTES',
+                            y: data.doncente
+                    }]
+                }]
+            });
+        });
+    });
+
+
+
+
+</script>
+</html>
+
+
